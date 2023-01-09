@@ -3,7 +3,7 @@
  * Обработка подписки на события
  */
 
-use SergeyPreobrazhensky\Megaplansdk\Logger\FileLogger;
+use Megaplan\Megaplansdk\Logger\FileLogger;
 
 include __DIR__.'/../../vendor/autoload.php';
 $logger = FileLogger::infoLogger(__DIR__. '/debug.log');

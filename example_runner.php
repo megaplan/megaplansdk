@@ -1,7 +1,7 @@
 <?php
 
-use SergeyPreobrazhensky\Megaplansdk\Logger\FileLogger;
-use SergeyPreobrazhensky\Megaplansdk\MegaplanRequest;
+use Megaplan\Megaplansdk\Logger\FileLogger;
+use Megaplan\Megaplansdk\MegaplanRequest;
 
 include 'vendor/autoload.php';
 

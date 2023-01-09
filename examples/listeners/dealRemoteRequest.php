@@ -3,7 +3,7 @@
  * Обработка внешнего запроса из сделки/бизнес процесса
  */
 
-use SergeyPreobrazhensky\Megaplansdk\Logger\FileLogger;
+use Megaplan\Megaplansdk\Logger\FileLogger;
 
 include __DIR__.'/../../vendor/autoload.php';
 

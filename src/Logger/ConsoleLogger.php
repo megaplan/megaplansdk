@@ -1,6 +1,6 @@
 <?php
 
-namespace SergeyPreobrazhensky\Megaplansdk\Logger;
+namespace Megaplan\Megaplansdk\Logger;
 
 class ConsoleLogger extends AbstractLogger
 {

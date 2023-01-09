@@ -1,6 +1,6 @@
 <?php
 
-namespace SergeyPreobrazhensky\Megaplansdk;
+namespace Megaplan\Megaplansdk;
 
 use Exception;
 

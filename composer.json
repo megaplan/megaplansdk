@@ -1,11 +1,11 @@
 {
-    "name": "sergey-preobrazhensky/megaplansdk",
+    "name": "megaplan/megaplansdk",
     "description": "PHP Library for work with API Megaplan",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "SergeyPreobrazhensky\\Megaplansdk\\": "src/"
+            "Megaplan\\Megaplansdk\\": "src/"
         }
     },
     "authors": [
