@@ -42,6 +42,9 @@ class MegaplanRequest
         return $this->send($url, 'DELETE', $params, $headers);
     }
 
+    /**
+     * @throws Exception
+     */
     public function send($url, $type = 'GET', $params = [], $headers = [])
     {
         $httpCode = 0;
@@ -63,8 +66,8 @@ class MegaplanRequest
             }
             $this->logger->info('data', $data);
         } catch (Exception $e) {
-            $exceptionMessage = $e->getMessage();
-            $data = new \stdClass();
+            $this->logger->error($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         return new MegaplanResponse(
