@@ -3,6 +3,7 @@
 namespace Megaplan\Megaplansdk;
 
 use Exception;
+use Megaplan\Megaplansdk\Logger\FakeLogger;
 
 class MegaplanRequest
 {
@@ -15,10 +16,13 @@ class MegaplanRequest
     public function __construct(
         private string $host,
         private string $token,
-        private logger\LoggerInterface $logger,
+        private logger\LoggerInterface|null $logger = null,
         private bool $includedResponse = true
     )
     {
+        if (empty($this->logger)) {
+            $this->logger = FakeLogger::infoLogger();
+        }
     }
 
     public function get($url, $params = [], $headers = []): MegaplanResponse
@@ -53,13 +57,14 @@ class MegaplanRequest
         try {
             list($httpCode, $rawResponse) = $this->doRequest($type, $this->host.$url, $params, $headers);
             $data = json_decode($rawResponse);
-            if (!empty($data->data) && !empty($data->included)) {
+            if ($this->includedResponse && !empty($data->data) && !empty($data->included)) {
                 $includedByType = $this->getIncludedByType($data->included);
                 $data->data = $this->processIncluded($data->data, $includedByType);
             }
             $this->logger->info('data', $data);
         } catch (Exception $e) {
             $exceptionMessage = $e->getMessage();
+            $data = new \stdClass();
         }
 
         return new MegaplanResponse(

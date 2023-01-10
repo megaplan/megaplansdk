@@ -1,4 +1,6 @@
 <?php
+/** @var $logger \Megaplan\Megaplansdk\Logger\LoggerInterface **/
+/** @var $request \Megaplan\Megaplansdk\MegaplanRequest **/
 
 // расширенные поля задач
 $url = '/api/v3/task/extraFields';
@@ -11,6 +13,11 @@ $url = '/api/v3/task/extraFields';
 
 $response = $request->get($url);
 $data = $response->getData();
+
+if ($response->getError()) {
+    $logger->error($response->getError());
+    exit();
+}
 
 $logger->info('data', $data);
 foreach ($data->data as $field) {
