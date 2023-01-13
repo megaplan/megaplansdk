@@ -1,7 +1,13 @@
 <?php
-
-$responsibleId = 1000003;
-$programId = 5;
+/**
+ * Создание сделки
+ */
+// ID менеджера
+$managerId = 1000003;
+// ID схемы сделки
+$programId = 8;
+// ID клиента
+$contractorId = 1000666;
 
 $url = '/api/v3/deal/';
 $params = [
@@ -13,7 +19,11 @@ $params = [
     ],
     'manager' => [
         'contentType' => 'Employee',
-        'id' => $responsibleId,
+        'id' => $managerId,
+    ],
+    'contractor' => [
+        'contentType' => 'ContractorCompany',
+        'id' => $contractorId,
     ],
     'description' => 'Описание',
     // ...
