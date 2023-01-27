@@ -1,4 +1,7 @@
 <?php
+/**
+ *  Список клиентов с фильтром
+ */
 
 $url = '/api/v3/contractor';
 $params = [
@@ -13,7 +16,7 @@ $params = [
                 'terms' => [
                     // Примеры условий фильтрации:
                     // Фильтр по создателю
-                    [
+                /*    [
                        'contentType' => 'FilterTermRef',
                        'field' => 'userCreated',
                        'comparison' => 'equals',
@@ -21,9 +24,9 @@ $params = [
                            'id' => '792',
                            'contentType' => 'Employee',
                        ]],
-                   ],
+                   ],*/
                     // Фильтр по ответственному
-                    [
+                 /*   [
                         'contentType' => 'FilterTermRef',
                         'field' => 'responsibles',
                         'comparison' => 'equals',
@@ -31,6 +34,27 @@ $params = [
                             'id' => '1000014',
                             'contentType' => 'Employee',
                         ]],
+                    ],*/
+                    // Фильтр по дате изменения с 1 по 27 января 2023
+                    [
+                        'contentType' => 'FilterTermDate',
+                        'field' => 'timeUpdated',
+                        'comparison' => 'equals',
+                        'value' => [
+                            'contentType' => 'IntervalDates',
+                            'from' => [
+                                'contentType' => 'DateOnly',
+                                'year' => 2023,
+                                'month' => 0,
+                                'day' => 1,
+                            ],
+                            'to' =>  [
+                                'contentType' => 'DateOnly',
+                                'year' => 2023,
+                                'month' => 0,
+                                'day' => 27,
+                            ],
+                        ],
                     ],
                     // ...
                     // Фильтр по расширенному числовому полю
@@ -48,6 +72,9 @@ $params = [
    'onlyRequestedFields' => true,
     // Запрашиваемые поля
    'fields' => [
+       'name',
+       'firstName',
+       'lastName',
        'name',
        'type',
        'responsibles',

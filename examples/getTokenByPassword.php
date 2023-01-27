@@ -1,12 +1,16 @@
 <?php
 
+use Megaplan\Megaplansdk\Logger\AbstractLogger;
+use Megaplan\Megaplansdk\Logger\ConsoleLogger;
+use Megaplan\Megaplansdk\MegaplanRequest;
+
 include __DIR__.'../autoload.php';
 
 $host = '';
 $user = '';
 $pass = '';
 
-$logger = new logger\ConsoleLogger(\logger\AbstractLogger::LEVEL_INFO);
+$logger = new ConsoleLogger(AbstractLogger::LEVEL_INFO);
 
 $request = new MegaplanRequest($host, '', $logger);
 $response = $request->send(
