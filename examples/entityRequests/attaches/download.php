@@ -10,7 +10,7 @@ use Megaplan\Megaplansdk\MegaplanRequest;
  *  @var  LoggerInterface $logger
  */
 
-// Получаем из поля типа Attache
+// Получаем из поля типа File
 $fileId = 87;
 $fileName = 'test.ods';
 
