@@ -10,14 +10,7 @@ use Megaplan\Megaplansdk\MegaplanRequest;
  *  @var  LoggerInterface $logger
  */
 
-// Получаем из поля типа File
-$fileId = 87;
-$fileName = 'test.ods';
-
-$result = $request->get('/api/v3/attache/shareUrl/'.$fileId);
-$data = $result->getData();
-$logger->info('link', $data->data->link);
-file_put_contents(
-    '/tmp/'.$fileName,
-    file_get_contents($data->data->link)
-);
+// Из поля path объекта типа File
+$fileMegaplanPath = '/attach/SdfFileM_File/File/88/36f9af65837270d11934140da57f6cef.zip/test1.zip';
+$file = fopen('/tmp/test1.zip', 'w');
+$request->download($file, $fileMegaplanPath);
