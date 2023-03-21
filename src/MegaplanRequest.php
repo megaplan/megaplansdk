@@ -42,6 +42,15 @@ class MegaplanRequest
         return $this->send($url, 'DELETE', $params, $headers);
     }
 
+    public function download($toFile, $url, $type = 'GET', $params = [], $headers = []) {
+        $headers = array_merge([
+            'AUTHORIZATION: Bearer '.$this->token,
+            'content-type: application/json',
+            $this->includedResponse ? 'X-USE-INCLUDED-RESPONSE: true' : '',
+        ], $headers);
+        $this->doRequest($type, $this->host.$url, $params, $headers, $toFile);
+    }
+
     /**
      * @throws Exception
      */
@@ -85,8 +94,9 @@ class MegaplanRequest
      * @param mixed $url
      * @param mixed $params
      * @param mixed $headers
+     * @param resource|null $toFile
      */
-    private function doRequest($type, $url, $params, $headers)
+    private function doRequest($type, $url, $params, $headers, $toFile = null)
     {
         $this->logger->info('request', [
            'url' => $url,
@@ -104,7 +114,10 @@ class MegaplanRequest
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            if ($toFile) {
+                curl_setopt($ch, CURLOPT_FILE, $toFile);
+            }
             $content = curl_exec($ch);
             if (false === $content) {
                 throw new Exception(curl_error($ch), curl_errno($ch));
